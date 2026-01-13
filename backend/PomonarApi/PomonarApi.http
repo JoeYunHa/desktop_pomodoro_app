@@ -1,0 +1,6 @@
+@PomonarApi_HostAddress = http://localhost:5270
+
+GET {{PomonarApi_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
