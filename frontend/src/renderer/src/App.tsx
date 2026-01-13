@@ -84,7 +84,7 @@ export default function App() {
 
       // Add to history
       const currentPreset = DEFAULT_PRESETS.find((p) => p.id === activePresetId);
-      setHistory([
+      setHistory((prev) => [
         {
           id: Date.now().toString(),
           type: 'pomodoro',
@@ -92,7 +92,7 @@ export default function App() {
           completedAt: new Date(),
           duration: Math.floor(maxTime / 60),
         },
-        ...history,
+        ...prev,
       ]);
 
       if (settings.sound) {
@@ -106,7 +106,7 @@ export default function App() {
     return () => {
       if (interval) clearInterval(interval);
     };
-  }, [isActive, timeLeft, settings.sound, settings.notifications, maxTime, activePresetId, history]);
+  }, [isActive, timeLeft, settings.sound, settings.notifications, maxTime, activePresetId]);
 
   // Keyboard shortcuts
   useEffect(() => {
@@ -186,14 +186,14 @@ export default function App() {
 
       // Add to history if completing
       if (!todo.completed) {
-        setHistory([
+        setHistory((prev) => [
           {
             id: Date.now().toString(),
             type: 'todo',
             title: todo.title,
             completedAt: new Date(),
           },
-          ...history,
+          ...prev,
         ]);
       }
     }
@@ -214,10 +214,7 @@ export default function App() {
   const selectedTodo = todos.find((t) => t.id === selectedTodoId);
 
   return (
-    <div
-      className="relative h-screen w-screen bg-gray-50 flex flex-col overflow-hidden"
-      style={{ width: '1100px', height: '720px', margin: '0 auto' }}
-    >
+    <div className="relative h-full w-full bg-gray-50 flex flex-col">
       <TitleBar />
       <Toolbar
         activeTab={activeTab}
@@ -225,7 +222,7 @@ export default function App() {
         onSettingsClick={() => setSettingsPanelOpen(!settingsPanelOpen)}
       />
 
-      <div className="flex-1 overflow-hidden relative">
+      <div className="flex-1 min-h-0 overflow-auto relative">
         <div
           className={`h-full transition-all duration-300 ${
             settingsPanelOpen ? 'mr-80' : 'mr-0'

@@ -53,7 +53,7 @@ export function Controls({
       
       <div className="flex items-center gap-4 text-xs text-gray-500">
         <span>Space = Start/Pause</span>
-        <span>•</span>
+        <span>|</span>
         <span>R = Reset</span>
       </div>
     </div>

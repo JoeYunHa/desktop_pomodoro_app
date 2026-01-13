@@ -31,7 +31,7 @@ export function History({ items }: HistoryProps) {
 
       {items.length === 0 ? (
         <div className="flex-1 flex flex-col items-center justify-center text-center">
-          <div className="text-6xl mb-4">📊</div>
+          <div className="text-6xl mb-4">0_0</div>
           <div className="text-lg font-medium text-gray-900 mb-2">No history yet</div>
           <div className="text-sm text-gray-500">
             Completed timers and to-dos will appear here
